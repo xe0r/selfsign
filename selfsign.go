@@ -48,7 +48,7 @@ func readPem(filename, blockname string) (*pem.Block, error) {
 	return nil, NoSuchBlock
 }
 
-func getExistingCertificate(certfile, keyfile string) (cert *x509.Certificate, key *rsa.PrivateKey) {
+func ReadCertificates(certfile, keyfile string) (cert *x509.Certificate, key *rsa.PrivateKey) {
 	certblock, err := readPem(certfile, CERTBLOCK)
 	if err != nil {
 		return
@@ -73,7 +73,7 @@ func getExistingCertificate(certfile, keyfile string) (cert *x509.Certificate, k
 }
 
 func GenerateCertificate(hostname, certfile, keyfile string) error {
-	cert, key := getExistingCertificate(certfile, keyfile)
+	cert, key := ReadCertificates(certfile, keyfile)
 
 	if cert != nil {
 
